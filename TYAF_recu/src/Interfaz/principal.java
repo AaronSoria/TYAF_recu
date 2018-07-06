@@ -5,12 +5,14 @@
  */
 package Interfaz;
 
-import Clases.paquete;
+import Clases.*;
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import javax.swing.ImageIcon;
+import java.io.File;
+import java.nio.file.Files;
 
 /**
  *
@@ -35,14 +37,33 @@ public class principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Analizar Captura");
+        jButton1.setText("Reconstruir Imagenes");
         jButton1.setName("btmanalizarcaptura"); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setToolTipText("");
+        jButton2.setLabel("analisis por textura");
+        jButton2.setName("btm_animg"); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("analisis por objeto");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -51,17 +72,30 @@ public class principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jButton1)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(249, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(26, 26, 26))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(jButton2)
+                .addGap(29, 29, 29)
+                .addComponent(jButton3)
+                .addContainerGap(123, Short.MAX_VALUE))
         );
+
+        jButton3.getAccessibleContext().setAccessibleName("btmanlisisXob");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -121,6 +155,74 @@ fr.close();
             }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        nu_scanner scanner = new nu_scanner();
+        //funciona
+        String origen="/home/stark28/Imágenes/pruebas/tercer dataset/";
+        String intermedio="/home/stark28/Imágenes/reconstruido/";
+        String destino="/home/stark28/Imágenes/evicencia/";
+        File dir = new File(origen);
+        String[] ficheros = dir.list();
+        int x=0;
+        while(ficheros != null)
+        {
+            scanner.convert_to_hsv(origen+ficheros[x], intermedio+ficheros[x]);
+            //probar con 0.19
+            double y = scanner.skin_scan(intermedio+ficheros[x]);
+            if (y>0.15)
+            {
+                System.out.println("ALERTA!! " + origen+ficheros[x]);
+                //copiar la evidencia a otra carpeta o destino
+                java.nio.file.Path origenPath = java.nio.file.FileSystems.getDefault().getPath(origen+ficheros[x]);
+                java.nio.file.Path destinoPath = java.nio.file.FileSystems.getDefault().getPath(destino+ficheros[x]);
+                try
+                {
+                    Files.copy(origenPath, destinoPath,java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                }
+                catch (Exception e)
+                {
+                    System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
+                }
+            }
+            x=x+1;
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        nu_scanner scanner = new nu_scanner();
+        //funciona
+        String origen="/home/stark28/Imágenes/pruebas/tercer dataset/";
+        String intermedio="/home/stark28/Imágenes/reconstruido/";
+        String destino="/home/stark28/Imágenes/evicencia/";
+        File dir = new File(origen);
+        String[] ficheros = dir.list();
+        int x=0;
+        while(ficheros != null)
+        {
+            scanner.full_body_detection(origen+ficheros[x]);
+            scanner.lower_body_detection(origen+ficheros[x]);
+            scanner.upper_body_detection(origen+ficheros[x]);
+            if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0)
+            {
+                System.out.println("ALERTA!! " + origen+ficheros[x]);
+                //copiar la evidencia a otra carpeta o destino
+                java.nio.file.Path origenPath = java.nio.file.FileSystems.getDefault().getPath(origen+ficheros[x]);
+                java.nio.file.Path destinoPath = java.nio.file.FileSystems.getDefault().getPath(destino+ficheros[x]);
+                try
+                {
+                    Files.copy(origenPath, destinoPath,java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                }
+                catch (Exception e)
+                {
+                    System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
+                }
+            }
+            x=x+1;
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -158,6 +260,9 @@ fr.close();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
     private boolean recuperar(BufferedReader buffrd, String sLine, paquete mipaquete)
