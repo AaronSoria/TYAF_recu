@@ -13,6 +13,7 @@ import java.io.FileReader;
 import javax.swing.ImageIcon;
 import java.io.File;
 import java.nio.file.Files;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,6 +41,10 @@ public class principal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,32 +72,61 @@ public class principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Introduzca el direcotrio o archivo a analizar");
+
+        jLabel2.setText("¿Donde deben guardarse los resultados?");
+
+        jButton4.setText("analisis profundo");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(jTextField2))
+                        .addGap(42, 42, 42))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(30, 30, 30)
+                .addComponent(jButton1)
                 .addGap(26, 26, 26)
                 .addComponent(jButton2)
                 .addGap(29, 29, 29)
                 .addComponent(jButton3)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jButton4)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         jButton3.getAccessibleContext().setAccessibleName("btmanlisisXob");
@@ -158,18 +192,19 @@ fr.close();
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         nu_scanner scanner = new nu_scanner();
-        //funciona
-        String origen="/home/stark28/Imágenes/pruebas/tercer dataset/";
-        String intermedio="/home/stark28/Imágenes/reconstruido/";
-        String destino="/home/stark28/Imágenes/evicencia/";
+        
+        //funciona 
+        String origen=jTextField1.getText();
+        String intermedio=jTextField1.getText();
+        String destino=jTextField2.getText();
         File dir = new File(origen);
         String[] ficheros = dir.list();
         int x=0;
         while(ficheros != null)
         {
-            scanner.convert_to_hsv(origen+ficheros[x], intermedio+ficheros[x]);
+            scanner.convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
             //probar con 0.19
-            double y = scanner.skin_scan(intermedio+ficheros[x]);
+            double y = scanner.skin_scan(intermedio+"temp"+ficheros[x]);
             if (y>0.15)
             {
                 System.out.println("ALERTA!! " + origen+ficheros[x]);
@@ -185,26 +220,33 @@ fr.close();
                     System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
                 }
             }
+            File temp = new File(intermedio+"temp"+ficheros[x]);
+            temp.delete();
             x=x+1;
         }
+        JOptionPane.showMessageDialog(rootPane, "Finalizacion exitosa", "El proceso ha finalizado con éxito", HEIGHT);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         nu_scanner scanner = new nu_scanner();
         //funciona
-        String origen="/home/stark28/Imágenes/pruebas/tercer dataset/";
-        String intermedio="/home/stark28/Imágenes/reconstruido/";
-        String destino="/home/stark28/Imágenes/evicencia/";
+        String origen=jTextField1.getText();
+        String destino=jTextField2.getText();
         File dir = new File(origen);
         String[] ficheros = dir.list();
         int x=0;
         while(ficheros != null)
         {
+            //scanner.convert_to_greyscale(origen+ficheros[x],destino+"temp"+ficheros[x]);
+//            scanner.full_body_detection(destino+"temp"+ficheros[x]);
+//            scanner.lower_body_detection(destino+"temp"+ficheros[x]);
+//            scanner.upper_body_detection(destino+"temp"+ficheros[x]);
+            //scanner.breasts_detection(origen+ficheros[x]);
             scanner.full_body_detection(origen+ficheros[x]);
             scanner.lower_body_detection(origen+ficheros[x]);
             scanner.upper_body_detection(origen+ficheros[x]);
-            if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0)
+            if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0 || scanner.breasts != 0)
             {
                 System.out.println("ALERTA!! " + origen+ficheros[x]);
                 //copiar la evidencia a otra carpeta o destino
@@ -219,9 +261,56 @@ fr.close();
                     System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
                 }
             }
+            //File temp = new File(destino+"temp"+ficheros[x]);
+            //temp.delete();
             x=x+1;
+            scanner.reset_flags();
         }
+        System.out.println("Completo!!!");
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+
+        nu_scanner scanner = new nu_scanner();
+        //funciona 
+        String origen=jTextField1.getText();
+        String intermedio=jTextField1.getText();
+        String destino=jTextField2.getText();
+        File dir = new File(origen);
+        String[] ficheros = dir.list();
+        int x=0;
+        while(ficheros != null)
+        {
+            scanner.convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
+            //probar con 0.19
+            double y = scanner.skin_scan(intermedio+"temp"+ficheros[x]);
+            if (y>0.15)
+            {
+                scanner.full_body_detection(origen+ficheros[x]);
+                scanner.lower_body_detection(origen+ficheros[x]);
+                scanner.upper_body_detection(origen+ficheros[x]);
+                if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0)
+                {
+                    System.out.println("ALERTA!! " + origen+ficheros[x]);
+                    //copiar la evidencia a otra carpeta o destino
+                    java.nio.file.Path origenPath = java.nio.file.FileSystems.getDefault().getPath(origen+ficheros[x]);
+                    java.nio.file.Path destinoPath = java.nio.file.FileSystems.getDefault().getPath(destino+ficheros[x]);
+                    try
+                    {
+                        Files.copy(origenPath, destinoPath,java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
+                    }
+                }
+            }
+            File temp = new File(intermedio+"temp"+ficheros[x]);
+            temp.delete();
+            x=x+1;
+        }        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,7 +351,11 @@ fr.close();
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    public javax.swing.JTextField jTextField1;
+    public javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 
     private boolean recuperar(BufferedReader buffrd, String sLine, paquete mipaquete)
