@@ -45,6 +45,9 @@ public class principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,6 +86,15 @@ public class principal extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("analisis por reconocimiento facial");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("¿De donde se puede aprender para identificar un rostro?");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,22 +102,25 @@ public class principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(jTextField2))
-                        .addGap(42, 42, 42))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1)
+                            .addComponent(jTextField2)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,19 +129,25 @@ public class principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addComponent(jButton1)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton5)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jButton3.getAccessibleContext().setAccessibleName("btmanlisisXob");
@@ -136,95 +157,113 @@ public class principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String origen=jTextField1.getText();
+        String destino=jTextField2.getText();
+        if (!(origen.equals("")) && !(destino.equals("")))
+        {
+            File dir = new File(origen);
+            File dir2 = new File(destino);
+            if (dir.exists() && dir2.exists())
+            {        
                     try{
-                //abrir archivo y leer imagen
-                String FILENAME = "/home/stark28/planos/prueba_03_03.txt";
-                BufferedReader br = null;
-		FileReader fr = null;
-                fr = new FileReader(FILENAME);
-		br = new BufferedReader(fr);
-                String sCurrentLine="";
-                paquete mipaquete = new paquete();
-                while ((sCurrentLine = br.readLine()) != null)
-                {
-                    try 
-                    {
-                        boolean result = recuperar(br, sCurrentLine, mipaquete);
-                        if (result == true)
-                        {
-                            result = reconstruir(br, sCurrentLine, mipaquete);
-                            if (result == true)
-                            {
-                                System.out.println("ok: " + mipaquete.id);
-                                mipaquete.insertarenbd();
-                                paquete mipack = new paquete();
-                                System.out.println(sCurrentLine);
-                            }
-                            else
-                            {
-                                System.out.println("emergencia: " + mipaquete.id);
-                                paquete mipack = new paquete();
-                            }
-                        }
-                        else
-                        {
-                            sCurrentLine = br.readLine();
-                        }
-                    }
-                    catch(Exception ex)
-                    {
-                        System.out.println(ex);
-                        sCurrentLine = br.readLine();
-                    }
+                        //abrir archivo y leer imagen
+                        String FILENAME = origen;
+                        //String FILENAME = "/home/stark28/planos/prueba_03_03.txt";
+                        BufferedReader br = null;
+                        FileReader fr = null;
+                        fr = new FileReader(FILENAME);
+                        br = new BufferedReader(fr);
+                        String sCurrentLine="";
+                        paquete mipaquete = new paquete();
+                        while ((sCurrentLine = br.readLine()) != null){                            
+                            try{
+                                boolean result = recuperar(br, sCurrentLine, mipaquete);
+                                if (result == true){
+                                    result = reconstruir(br, sCurrentLine, mipaquete,destino);
+                                    if (result == true){
+                                        System.out.println("ok: " + mipaquete.id);
+                                        mipaquete.insertarenbd();
+                                        paquete mipack = new paquete();
+                                        System.out.println(sCurrentLine);
+                                        }
+                                    else{
+                                        System.out.println("emergencia: " + mipaquete.id);
+                                        paquete mipack = new paquete();
+                                        }
+                                    }
+                                
+                                else{
+                                    sCurrentLine = br.readLine();
+                                    }
+                                }
+                            catch(Exception ex)
+                                {
+                                    System.out.println(ex);
+                                    sCurrentLine = br.readLine();
+                                }
                 }
-
                     Image im = mipaquete.restore_image();
 //                    Image myImg = im.getScaledInstance(label.getWidth(), label.getHeight(),Image.SCALE_SMOOTH);
 //                    ImageIcon newImage = new ImageIcon(myImg);
 //                    label.setIcon(newImage);
-br.close();
-fr.close();
-            }catch(Exception ex){
+                    br.close();
+                    fr.close();
+            }
+                    catch(Exception ex){
                 ex.printStackTrace();
             }
+            }
+            dir=null;
+            dir2=null;
+        }
+        System.gc();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         nu_scanner scanner = new nu_scanner();
-        
         //funciona 
         String origen=jTextField1.getText();
         String intermedio=jTextField1.getText();
         String destino=jTextField2.getText();
-        File dir = new File(origen);
-        String[] ficheros = dir.list();
-        int x=0;
-        while(ficheros != null)
+        if (!(origen.equals("")) && !(destino.equals("")))
         {
-            scanner.convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
-            //probar con 0.19
-            double y = scanner.skin_scan(intermedio+"temp"+ficheros[x]);
-            if (y>0.15)
+            File dir = new File(origen);
+            File dir2 = new File(destino);
+            if (dir.exists() && dir2.exists())
             {
-                System.out.println("ALERTA!! " + origen+ficheros[x]);
-                //copiar la evidencia a otra carpeta o destino
-                java.nio.file.Path origenPath = java.nio.file.FileSystems.getDefault().getPath(origen+ficheros[x]);
-                java.nio.file.Path destinoPath = java.nio.file.FileSystems.getDefault().getPath(destino+ficheros[x]);
-                try
+                String[] ficheros = dir.list();
+                int x=0;
+                while(ficheros != null)
                 {
-                    Files.copy(origenPath, destinoPath,java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-                }
-                catch (Exception e)
-                {
-                    System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
+                    scanner.convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
+                    //probar con 0.19
+                    double y = scanner.skin_scan(intermedio+"temp"+ficheros[x]);
+                    if (y>0.15)
+                    {
+                        System.out.println("ALERTA!! " + origen+ficheros[x]);
+                        //copiar la evidencia a otra carpeta o destino
+                        java.nio.file.Path origenPath = java.nio.file.FileSystems.getDefault().getPath(origen+ficheros[x]);
+                        java.nio.file.Path destinoPath = java.nio.file.FileSystems.getDefault().getPath(destino+ficheros[x]);
+                        try
+                        {
+                            Files.copy(origenPath, destinoPath,java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
+                        }
+                    }
+                    File temp = new File(intermedio+"temp"+ficheros[x]);
+                    temp.delete();
+                    x=x+1;
                 }
             }
-            File temp = new File(intermedio+"temp"+ficheros[x]);
-            temp.delete();
-            x=x+1;
-        }
-        JOptionPane.showMessageDialog(rootPane, "Finalizacion exitosa", "El proceso ha finalizado con éxito", HEIGHT);
+            dir=null;
+            dir2=null;
+        }        
+        scanner=null;
+        System.gc();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -233,40 +272,51 @@ fr.close();
         //funciona
         String origen=jTextField1.getText();
         String destino=jTextField2.getText();
-        File dir = new File(origen);
-        String[] ficheros = dir.list();
-        int x=0;
-        while(ficheros != null)
+        if (!(origen.equals("")) && !(destino.equals("")))
         {
+            File dir = new File(origen);
+            File dir2 = new File(destino);
+            if (dir.exists() && dir2.exists())
+            {
+                String[] ficheros = dir.list();
+                int x=0;
+                while(ficheros != null)
+                {
             //scanner.convert_to_greyscale(origen+ficheros[x],destino+"temp"+ficheros[x]);
 //            scanner.full_body_detection(destino+"temp"+ficheros[x]);
 //            scanner.lower_body_detection(destino+"temp"+ficheros[x]);
 //            scanner.upper_body_detection(destino+"temp"+ficheros[x]);
             //scanner.breasts_detection(origen+ficheros[x]);
-            scanner.full_body_detection(origen+ficheros[x]);
-            scanner.lower_body_detection(origen+ficheros[x]);
-            scanner.upper_body_detection(origen+ficheros[x]);
-            if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0 || scanner.breasts != 0)
-            {
-                System.out.println("ALERTA!! " + origen+ficheros[x]);
-                //copiar la evidencia a otra carpeta o destino
-                java.nio.file.Path origenPath = java.nio.file.FileSystems.getDefault().getPath(origen+ficheros[x]);
-                java.nio.file.Path destinoPath = java.nio.file.FileSystems.getDefault().getPath(destino+ficheros[x]);
-                try
-                {
-                    Files.copy(origenPath, destinoPath,java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-                }
-                catch (Exception e)
-                {
-                    System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
-                }
-            }
+                    scanner.full_body_detection(origen+ficheros[x]);
+                    scanner.lower_body_detection(origen+ficheros[x]);
+                    scanner.upper_body_detection(origen+ficheros[x]);
+                    if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0 || scanner.breasts != 0)
+                    {
+                        //System.out.println("ALERTA!! " + origen+ficheros[x]);
+                        //copiar la evidencia a otra carpeta o destino
+                        java.nio.file.Path origenPath = java.nio.file.FileSystems.getDefault().getPath(origen+ficheros[x]);
+                        java.nio.file.Path destinoPath = java.nio.file.FileSystems.getDefault().getPath(destino+ficheros[x]);
+                        try
+                        {
+                            Files.copy(origenPath, destinoPath,java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
+                        }
+                    }
             //File temp = new File(destino+"temp"+ficheros[x]);
             //temp.delete();
-            x=x+1;
-            scanner.reset_flags();
+                    x=x+1;
+                    scanner.reset_flags();
+                }
+                System.out.println("Completo!!!");
+            }
+            dir=null;
+            dir2=null;
         }
-        System.out.println("Completo!!!");
+        scanner=null;
+        System.gc();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -277,40 +327,73 @@ fr.close();
         String origen=jTextField1.getText();
         String intermedio=jTextField1.getText();
         String destino=jTextField2.getText();
-        File dir = new File(origen);
-        String[] ficheros = dir.list();
-        int x=0;
-        while(ficheros != null)
+        if (!(origen.equals("")) && !(destino.equals("")))
         {
-            scanner.convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
-            //probar con 0.19
-            double y = scanner.skin_scan(intermedio+"temp"+ficheros[x]);
-            if (y>0.15)
+            File dir = new File(origen);
+            File dir2 = new File(destino);
+            if (dir.exists() && dir2.exists())
             {
-                scanner.full_body_detection(origen+ficheros[x]);
-                scanner.lower_body_detection(origen+ficheros[x]);
-                scanner.upper_body_detection(origen+ficheros[x]);
-                if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0)
+                String[] ficheros = dir.list();
+                int x=0;
+                while(ficheros != null)
                 {
-                    System.out.println("ALERTA!! " + origen+ficheros[x]);
-                    //copiar la evidencia a otra carpeta o destino
-                    java.nio.file.Path origenPath = java.nio.file.FileSystems.getDefault().getPath(origen+ficheros[x]);
-                    java.nio.file.Path destinoPath = java.nio.file.FileSystems.getDefault().getPath(destino+ficheros[x]);
-                    try
+                    scanner.convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
+                    //probar con 0.19
+                    double y = scanner.skin_scan(intermedio+"temp"+ficheros[x]);
+                    if (y>0.15)
                     {
-                        Files.copy(origenPath, destinoPath,java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                        scanner.full_body_detection(origen+ficheros[x]);
+                        scanner.lower_body_detection(origen+ficheros[x]);
+                        scanner.upper_body_detection(origen+ficheros[x]);
+                        if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0)
+                            {
+                                System.out.println("ALERTA!! " + origen+ficheros[x]);
+                                //copiar la evidencia a otra carpeta o destino
+                                java.nio.file.Path origenPath = java.nio.file.FileSystems.getDefault().getPath(origen+ficheros[x]);
+                                java.nio.file.Path destinoPath = java.nio.file.FileSystems.getDefault().getPath(destino+ficheros[x]);
+                                try
+                                {
+                                    Files.copy(origenPath, destinoPath,java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                                }
+                                catch (Exception e)
+                                {
+                                    System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
+                                }
+                            }
                     }
-                    catch (Exception e)
-                    {
-                        System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
-                    }
-                }
+                    File temp = new File(intermedio+"temp"+ficheros[x]);
+                    temp.delete();
+                    x=x+1;
+                }                        
             }
-            File temp = new File(intermedio+"temp"+ficheros[x]);
-            temp.delete();
-            x=x+1;
-        }        
+            dir=null;
+            dir2=null;
+        }
+        scanner=null;
+        System.gc();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        nu_scanner scanner = new nu_scanner();
+        String origen=jTextField1.getText();
+        String destino=jTextField2.getText();
+        String entrenamiento=jTextField3.getText();
+        if (!(origen.equals("")) && !(destino.equals("")) && !(entrenamiento.equals("")))
+        {
+            File ef1 = new File(origen);
+            File ef2 = new File(destino);
+            File ef3 = new File(entrenamiento);
+            if (ef1.exists() && ef2.exists() && ef3.exists())
+            {
+                scanner.face_recognition(entrenamiento,origen,destino);
+                ef1=null;
+                ef2=null;
+                ef3=null;
+                scanner = null;
+                System.gc();
+            }
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,10 +435,13 @@ fr.close();
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     public javax.swing.JTextField jTextField1;
     public javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 
     private boolean recuperar(BufferedReader buffrd, String sLine, paquete mipaquete)
@@ -429,7 +515,7 @@ fr.close();
         }
 
                 
-        private boolean reconstruir(BufferedReader buffrd, String sLine, paquete mipaquete)
+        private boolean reconstruir(BufferedReader buffrd, String sLine, paquete mipaquete,String path)
         {
             try
             {
@@ -458,7 +544,8 @@ fr.close();
             System.out.println("Los que hay: "+fragments + ". Los que son: "+ mipaquete.fragments);
             if (mipaquete.fragments == fragments)
             {
-            FileOutputStream fos = new FileOutputStream("/home/stark28/Imágenes/reconstruido/"+mipaquete.id + ".jpg");
+                FileOutputStream fos = new FileOutputStream(path+mipaquete.id + ".jpg");
+            //FileOutputStream fos = new FileOutputStream("/home/stark28/Imágenes/reconstruido/"+mipaquete.id + ".jpg");
             try 
             {
                 fos.write(mipaquete.HexStringToBytes(mipaquete.content_byte));
@@ -476,7 +563,8 @@ fr.close();
             }
             else
             {
-            FileOutputStream fos = new FileOutputStream("/home/stark28/Imágenes/reconstruido/"+mipaquete.id + ".jpg");
+                FileOutputStream fos = new FileOutputStream(path+mipaquete.id + ".jpg");
+            //FileOutputStream fos = new FileOutputStream("/home/stark28/Imágenes/reconstruido/"+mipaquete.id + ".jpg");
             try 
             {
                 fos.write(mipaquete.HexStringToBytes(mipaquete.content_byte));

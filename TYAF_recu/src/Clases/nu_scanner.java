@@ -8,10 +8,23 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
+import java.nio.IntBuffer;
+import java.nio.file.Files;
 
+import static org.bytedeco.javacpp.opencv_core.CV_32SC1;
+import static org.bytedeco.javacpp.opencv_core.CV_8UC1;
+import static org.bytedeco.javacpp.opencv_imgcodecs.imread;
+import static org.bytedeco.javacpp.opencv_imgcodecs.CV_LOAD_IMAGE_GRAYSCALE;
 
-
-
+import org.bytedeco.javacpp.BytePointer;
+import org.bytedeco.javacpp.IntPointer;
+import org.bytedeco.javacpp.DoublePointer;
+import org.bytedeco.javacpp.opencv_face.FaceRecognizer;
+import org.bytedeco.javacpp.opencv_face.FisherFaceRecognizer;
+import org.bytedeco.javacpp.opencv_face.EigenFaceRecognizer;
+import org.bytedeco.javacpp.opencv_face.LBPHFaceRecognizer;
+import org.bytedeco.javacpp.opencv_core.Mat;
+import org.bytedeco.javacpp.opencv_core.MatVector;
 
 /**
  *
@@ -253,5 +266,73 @@ public int breasts;
         }
     }
     
-    
+    //face_matching
+    public void face_recognition(String imgfuente, String imgbuscar, String Copyin) 
+    {
+        String trainingDir = imgfuente;
+        File root = new File(trainingDir);
+        FilenameFilter imgFilter = new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                name = name.toLowerCase();
+                return name.endsWith(".jpg") || name.endsWith(".png");
+            }
+        };
+
+        File[] imageFiles = root.listFiles(imgFilter);
+        MatVector images = new MatVector(imageFiles.length);
+        Mat labels = new Mat(imageFiles.length, 1, CV_32SC1);
+        IntBuffer labelsBuf = labels.createBuffer();
+        int counter = 0;
+        int label1 =0;           
+
+//cargo las imagenes al conjunto de entrenamiento
+//tengo que darles un nuevo tamaño y como minimo tienen que ser 2
+        for (File image : imageFiles) {
+            if (image.getName().contains("directory") == false)
+            {
+                Mat img = imread(image.getAbsolutePath(), CV_LOAD_IMAGE_GRAYSCALE);
+                images.put(counter, img);
+                labelsBuf.put(counter, label1);
+                counter++;
+                label1++;
+            }
+        }
+
+        //FaceRecognizer faceRecognizer = org.bytedeco.javacpp.opencv_face.FisherFaceRecognizer.create();
+        //FaceRecognizer faceRecognizer = org.bytedeco.javacpp.opencv_face.EigenFaceRecognizer.create();
+        //termino de entrenar el reconocedor
+        FaceRecognizer faceRecognizer = org.bytedeco.javacpp.opencv_face.LBPHFaceRecognizer.create(); //no se rompe pero tira 0
+        faceRecognizer.train(images, labels);
+        IntPointer label = new IntPointer(1);
+        DoublePointer confidence = new DoublePointer(1);
+        
+        //hacemos un bucle para buscar en todas las imagenes del directorio deseado
+        File dir = new File(imgbuscar);
+        String[] ficheros = dir.list();
+        int x=0;
+        while(ficheros != null)
+        {
+            if(ficheros[x].contains("directory") == false)
+            {
+                Mat testImage = imread(imgbuscar+ficheros[x], CV_LOAD_IMAGE_GRAYSCALE);
+                faceRecognizer.predict(testImage, label, confidence);
+                double conf=confidence.get();
+                if (conf>80.00)
+                {
+                    //copiar la evidencia a otra carpeta o destino
+                    java.nio.file.Path origenPath = java.nio.file.FileSystems.getDefault().getPath(imgbuscar+ficheros[x]);
+                    java.nio.file.Path destinoPath = java.nio.file.FileSystems.getDefault().getPath(Copyin+ficheros[x]);
+                    try
+                        {
+                            Files.copy(origenPath, destinoPath,java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                        }
+                    catch (Exception e)
+                        {
+                            System.out.println("ha ocurrido un error con "+imgbuscar+ficheros[x]);
+                        }
+                }
+            }
+            x++;
+        }
+    }    
 }
