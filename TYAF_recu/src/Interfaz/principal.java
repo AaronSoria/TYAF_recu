@@ -290,7 +290,7 @@ public class principal extends javax.swing.JFrame {
                     scanner.full_body_detection(origen+ficheros[x]);
                     scanner.lower_body_detection(origen+ficheros[x]);
                     scanner.upper_body_detection(origen+ficheros[x]);
-                    if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0 || scanner.breasts != 0)
+                    if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0 )
                     {
                         //System.out.println("ALERTA!! " + origen+ficheros[x]);
                         //copiar la evidencia a otra carpeta o destino

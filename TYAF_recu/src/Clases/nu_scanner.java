@@ -145,7 +145,7 @@ public int breasts;
             String XML_FILE = "XML/haarcascade_fullbody.xml";
             CvHaarClassifierCascade cascade = new CvHaarClassifierCascade(cvLoad(XML_FILE));
             CvMemStorage storage = CvMemStorage.create();
-            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.8,5,CV_HAAR_DO_CANNY_PRUNING);
+            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.1,3,CV_HAAR_DO_CANNY_PRUNING);
             cvClearMemStorage(storage);
             this.full= sign.total();
 //            for(int i = 0; i < this.full; i++)
@@ -177,7 +177,7 @@ public int breasts;
             String XML_FILE = "XML/haarcascade_lowerbody.xml";
             CvHaarClassifierCascade cascade = new CvHaarClassifierCascade(cvLoad(XML_FILE));
             CvMemStorage storage = CvMemStorage.create();
-            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.8,5,CV_HAAR_DO_CANNY_PRUNING);
+            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.1,3,CV_HAAR_DO_CANNY_PRUNING);
             cvClearMemStorage(storage);
             this.lower = sign.total();
 //            for(int i = 0; i < this.lower; i++)
@@ -209,7 +209,7 @@ public int breasts;
             String XML_FILE = "XML/haarcascade_upperbody.xml";
             CvHaarClassifierCascade cascade = new CvHaarClassifierCascade(cvLoad(XML_FILE));
             CvMemStorage storage = CvMemStorage.create();
-            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.8,5,CV_HAAR_DO_CANNY_PRUNING);
+            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.1,3,CV_HAAR_DO_CANNY_PRUNING);
             cvClearMemStorage(storage);
             this.upper = sign.total();
 //            for(int i = 0; i < this.upper; i++)
