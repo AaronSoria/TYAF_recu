@@ -27,6 +27,9 @@ public class paquete {
         public String content_type;
         public String content_byte;
         public int actual_id;
+        public String host;
+        public String port;
+        public String bd;
 
         public boolean can_start_packet(String chain)
         {
@@ -237,13 +240,13 @@ public class paquete {
         public void insertarenbd()
         {
             //crear cliente de mongo
-            MongoClient mongo = new MongoClient( "localhost" , 27017 );
+            MongoClient mongo = new MongoClient( this.host , Integer.parseInt(this.port) );
             //crear credenciales
             MongoCredential credential;
             credential = MongoCredential.createCredential("Aaron", "tyaf",
                     "0123456789".toCharArray());
             //Accedemos a la bd
-            MongoDatabase database = mongo.getDatabase("tyaf");
+            MongoDatabase database = mongo.getDatabase(this.bd);
             //definifmos la coleccion en la que queremos guardar el documento
             com.mongodb.client.MongoCollection<Document> coleccion = database.getCollection("paquete");
             Document documento = new Document()

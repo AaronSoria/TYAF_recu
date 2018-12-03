@@ -1,4 +1,5 @@
 package Clases;
+import java.util.List;
 import static org.bytedeco.javacpp.opencv_core.*;
 import static org.bytedeco.javacpp.opencv_imgproc.*;
 import static org.bytedeco.javacpp.opencv_imgcodecs.*;
@@ -25,6 +26,8 @@ import org.bytedeco.javacpp.opencv_face.EigenFaceRecognizer;
 import org.bytedeco.javacpp.opencv_face.LBPHFaceRecognizer;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_core.MatVector;
+
+
 
 /**
  *
@@ -73,6 +76,7 @@ public int breasts;
             Mat bgr = org.bytedeco.javacpp.opencv_imgcodecs.imread(origin_paht);
             Mat greyscale = new Mat();
             org.bytedeco.javacpp.opencv_imgproc.cvtColor(bgr, greyscale, org.bytedeco.javacpp.opencv_imgproc.COLOR_BGR2GRAY);
+            org.bytedeco.javacpp.opencv_imgproc.equalizeHist(greyscale, greyscale);
             org.bytedeco.javacpp.opencv_imgcodecs.imwrite(destiny_paht, greyscale);
         }
         catch(Exception ex)
@@ -141,26 +145,29 @@ public int breasts;
     {
         try
         {
+            //asdasd
             IplImage img = cvLoadImage(src);
-            String XML_FILE = "XML/haarcascade_fullbody.xml";
+            Mat bgr = org.bytedeco.javacpp.opencv_imgcodecs.imread(src);
+            String XML_FILE = System.getProperty("user.dir")+"/haarcascade_fullbody.xml";
             CvHaarClassifierCascade cascade = new CvHaarClassifierCascade(cvLoad(XML_FILE));
             CvMemStorage storage = CvMemStorage.create();
-            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.1,3,CV_HAAR_DO_CANNY_PRUNING);
+            //CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.1,50,CV_HAAR_DO_CANNY_PRUNING);
+            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.1,3,CASCADE_FIND_BIGGEST_OBJECT);
             cvClearMemStorage(storage);
             this.full= sign.total();
-//            for(int i = 0; i < this.full; i++)
+//            for(int i = 0; i < sign.total(); i++)
 //                {
-//                    System.out.println(".");
+//                    //System.out.println(".");
 //                    CvRect faceRect = new CvRect(cvGetSeqElem(sign, i));
 //                    cvRectangle(img, 
 //                                cvPoint(faceRect.x(), faceRect.y()), 
-//                                cvPoint(faceRect.x(), faceRect.y()), 
+//                                cvPoint(faceRect.x()+faceRect.width(), faceRect.y()+faceRect.height()), 
 //                                CV_RGB(255,0, 0), 3, 8, 0);
 //                }
 //            if (this.full !=0)
 //            {
 //                Mat test = new Mat(img);
-//                org.bytedeco.javacpp.opencv_imgcodecs.imwrite(src+"(2)", test);
+//                org.bytedeco.javacpp.opencv_imgcodecs.imwrite(src+"(1)", test);
 //            }
         }
         catch(Exception e)
@@ -174,10 +181,11 @@ public int breasts;
         try
         {
             IplImage img = cvLoadImage(src);
-            String XML_FILE = "XML/haarcascade_lowerbody.xml";
+            String XML_FILE = System.getProperty("user.dir")+"/haarcascade_lowerbody.xml";
             CvHaarClassifierCascade cascade = new CvHaarClassifierCascade(cvLoad(XML_FILE));
             CvMemStorage storage = CvMemStorage.create();
-            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.1,3,CV_HAAR_DO_CANNY_PRUNING);
+            //CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.1,3,CV_HAAR_DO_CANNY_PRUNING);
+            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.025,3,CASCADE_FIND_BIGGEST_OBJECT);
             cvClearMemStorage(storage);
             this.lower = sign.total();
 //            for(int i = 0; i < this.lower; i++)
@@ -186,7 +194,7 @@ public int breasts;
 //                    CvRect faceRect = new CvRect(cvGetSeqElem(sign, i));
 //                    cvRectangle(img, 
 //                                cvPoint(faceRect.x(), faceRect.y()), 
-//                                cvPoint(faceRect.x(), faceRect.y()), 
+//                                cvPoint(faceRect.x()+faceRect.width(), faceRect.y()+faceRect.height()), 
 //                                CV_RGB(255,0, 0), 3, 8, 0);
 //                }
 //            if (this.lower !=0)
@@ -206,10 +214,10 @@ public int breasts;
         try
         {
             IplImage img = cvLoadImage(src);
-            String XML_FILE = "XML/haarcascade_upperbody.xml";
+            String XML_FILE = System.getProperty("user.dir")+"/haarcascade_upperbody.xml";
             CvHaarClassifierCascade cascade = new CvHaarClassifierCascade(cvLoad(XML_FILE));
             CvMemStorage storage = CvMemStorage.create();
-            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.1,3,CV_HAAR_DO_CANNY_PRUNING);
+            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.05,3,CASCADE_FIND_BIGGEST_OBJECT);
             cvClearMemStorage(storage);
             this.upper = sign.total();
 //            for(int i = 0; i < this.upper; i++)
@@ -218,7 +226,7 @@ public int breasts;
 //                    CvRect faceRect = new CvRect(cvGetSeqElem(sign, i));
 //                    cvRectangle(img, 
 //                                cvPoint(faceRect.x(), faceRect.y()), 
-//                                cvPoint(faceRect.x(), faceRect.y()), 
+//                                cvPoint(faceRect.x()+faceRect.width(), faceRect.y()+faceRect.height()), 
 //                                CV_RGB(255,0, 0), 3, 8, 0);
 //                }
 //            if (this.upper !=0)
@@ -238,11 +246,12 @@ public int breasts;
     {
         try
         {
+            
             IplImage img = cvLoadImage(src);
-            String XML_FILE = "XML/cascade.xml";
+            String XML_FILE = "/XML/cascade.xml";
             CvHaarClassifierCascade cascade = new CvHaarClassifierCascade(cvLoad(XML_FILE));
             CvMemStorage storage = CvMemStorage.create();
-            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.45,3,CV_HAAR_DO_CANNY_PRUNING);
+            CvSeq sign = cvHaarDetectObjects(img,cascade,storage,1.5,3,CV_HAAR_DO_CANNY_PRUNING);
             cvClearMemStorage(storage);
             this.breasts = sign.total();
 //            for(int i = 0; i < this.upper; i++)
@@ -334,5 +343,6 @@ public int breasts;
             }
             x++;
         }
-    }    
+    }
+        
 }
