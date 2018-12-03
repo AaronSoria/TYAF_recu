@@ -15,6 +15,7 @@ import java.io.File;
 import java.nio.file.Files;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author stark28
@@ -37,41 +38,50 @@ public class principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        Btm_reconstruir = new javax.swing.JButton();
+        btm_texturas = new javax.swing.JButton();
+        txt_analizar = new javax.swing.JTextField();
+        btm_objeto = new javax.swing.JButton();
+        txt_resultados = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btm_profundo = new javax.swing.JButton();
+        btm_reconocimiento = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txt_aprender = new javax.swing.JTextField();
+        conte_menu = new javax.swing.JMenuBar();
+        menubtm_configurar = new javax.swing.JMenu();
+        item_bd = new javax.swing.JMenuItem();
+
+        jMenu1.setText("jMenu1");
+
+        jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Reconstruir Imagenes");
-        jButton1.setName("btmanalizarcaptura"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Btm_reconstruir.setText("Reconstruir Imagenes");
+        Btm_reconstruir.setName("btmanalizarcaptura"); // NOI18N
+        Btm_reconstruir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Btm_reconstruirActionPerformed(evt);
             }
         });
 
-        jButton2.setToolTipText("");
-        jButton2.setLabel("analisis por textura");
-        jButton2.setName("btm_animg"); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btm_texturas.setToolTipText("");
+        btm_texturas.setLabel("analisis por textura");
+        btm_texturas.setName("btm_animg"); // NOI18N
+        btm_texturas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btm_texturasActionPerformed(evt);
             }
         });
 
-        jButton3.setText("analisis por objeto");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btm_objeto.setText("analisis por objeto");
+        btm_objeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btm_objetoActionPerformed(evt);
             }
         });
 
@@ -79,21 +89,35 @@ public class principal extends javax.swing.JFrame {
 
         jLabel2.setText("¿Donde deben guardarse los resultados?");
 
-        jButton4.setText("analisis profundo");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btm_profundo.setText("analisis profundo");
+        btm_profundo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btm_profundoActionPerformed(evt);
             }
         });
 
-        jButton5.setText("analisis por reconocimiento facial");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btm_reconocimiento.setText("analisis por reconocimiento facial");
+        btm_reconocimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btm_reconocimientoActionPerformed(evt);
             }
         });
 
         jLabel3.setText("¿De donde se puede aprender para identificar un rostro?");
+
+        menubtm_configurar.setText("Configuracion");
+
+        item_bd.setText("base de datos");
+        item_bd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_bdActionPerformed(evt);
+            }
+        });
+        menubtm_configurar.add(item_bd);
+
+        conte_menu.add(menubtm_configurar);
+
+        setJMenuBar(conte_menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,56 +133,77 @@ public class principal extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)))
+                            .addComponent(txt_analizar)
+                            .addComponent(txt_resultados)
+                            .addComponent(txt_aprender, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btm_profundo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Btm_reconstruir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btm_texturas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btm_objeto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btm_reconocimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_analizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_resultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_aprender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addComponent(jButton1)
+                .addComponent(Btm_reconstruir)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btm_texturas)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btm_objeto)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(btm_profundo)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(btm_reconocimiento)
+                .addContainerGap())
         );
 
-        jButton3.getAccessibleContext().setAccessibleName("btmanlisisXob");
+        btm_objeto.getAccessibleContext().setAccessibleName("btmanlisisXob");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String origen=jTextField1.getText();
-        String destino=jTextField2.getText();
+    private void Btm_reconstruirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btm_reconstruirActionPerformed
+        //Configuramos conexion a bd
+        String host="";
+        String port="";
+        String bd="";
+        try
+        {
+            String name = System.getProperty("user.dir")+"/config_file.txt";
+            BufferedReader buffr = null;
+            FileReader filer = null;
+            filer = new FileReader(name);
+            buffr = new BufferedReader(filer);
+            host=buffr.readLine();
+            port=buffr.readLine();
+            bd=buffr.readLine();
+            buffr=null;
+            filer = null;
+        }
+        catch(Exception ex)
+        {
+            
+        }
+        //analizamos archivos
+        String origen=txt_analizar.getText();
+        String destino=txt_resultados.getText();
         if (!(origen.equals("")) && !(destino.equals("")))
         {
             File dir = new File(origen);
@@ -175,13 +220,17 @@ public class principal extends javax.swing.JFrame {
                         br = new BufferedReader(fr);
                         String sCurrentLine="";
                         paquete mipaquete = new paquete();
-                        while ((sCurrentLine = br.readLine()) != null){                            
+                        while (sCurrentLine != null){
+                        //while ((sCurrentLine = br.readLine()) != null){                            
                             try{
                                 boolean result = recuperar(br, sCurrentLine, mipaquete);
                                 if (result == true){
                                     result = reconstruir(br, sCurrentLine, mipaquete,destino);
                                     if (result == true){
                                         System.out.println("ok: " + mipaquete.id);
+                                        mipaquete.host=host;
+                                        mipaquete.port=port;
+                                        mipaquete.bd=bd;
                                         mipaquete.insertarenbd();
                                         paquete mipack = new paquete();
                                         System.out.println(sCurrentLine);
@@ -217,15 +266,15 @@ public class principal extends javax.swing.JFrame {
             dir2=null;
         }
         System.gc();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Btm_reconstruirActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btm_texturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btm_texturasActionPerformed
 
         nu_scanner scanner = new nu_scanner();
         //funciona 
-        String origen=jTextField1.getText();
-        String intermedio=jTextField1.getText();
-        String destino=jTextField2.getText();
+        String origen=txt_analizar.getText();
+        String intermedio=txt_analizar.getText();
+        String destino=txt_resultados.getText();
         if (!(origen.equals("")) && !(destino.equals("")))
         {
             File dir = new File(origen);
@@ -233,13 +282,12 @@ public class principal extends javax.swing.JFrame {
             if (dir.exists() && dir2.exists())
             {
                 String[] ficheros = dir.list();
-                int x=0;
-                while(ficheros != null)
+                for(int x=1; x<ficheros.length;x++)
                 {
                     scanner.convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
                     //probar con 0.19
                     double y = scanner.skin_scan(intermedio+"temp"+ficheros[x]);
-                    if (y>0.15)
+                    if (y>0.15)  //bien 17/19 mal 5/25  bien:11/26  mal 10/26
                     {
                         System.out.println("ALERTA!! " + origen+ficheros[x]);
                         //copiar la evidencia a otra carpeta o destino
@@ -256,7 +304,7 @@ public class principal extends javax.swing.JFrame {
                     }
                     File temp = new File(intermedio+"temp"+ficheros[x]);
                     temp.delete();
-                    x=x+1;
+                    
                 }
             }
             dir=null;
@@ -264,14 +312,14 @@ public class principal extends javax.swing.JFrame {
         }        
         scanner=null;
         System.gc();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btm_texturasActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btm_objetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btm_objetoActionPerformed
         // TODO add your handling code here:
         nu_scanner scanner = new nu_scanner();
         //funciona
-        String origen=jTextField1.getText();
-        String destino=jTextField2.getText();
+        String origen=txt_analizar.getText();
+        String destino=txt_resultados.getText();
         if (!(origen.equals("")) && !(destino.equals("")))
         {
             File dir = new File(origen);
@@ -279,18 +327,26 @@ public class principal extends javax.swing.JFrame {
             if (dir.exists() && dir2.exists())
             {
                 String[] ficheros = dir.list();
-                int x=0;
-                while(ficheros != null)
+                //int x=0;
+                //while(ficheros != null)
+                for(int x=1; x<ficheros.length;x++)
                 {
+                    System.out.println(x);
             //scanner.convert_to_greyscale(origen+ficheros[x],destino+"temp"+ficheros[x]);
-//            scanner.full_body_detection(destino+"temp"+ficheros[x]);
-//            scanner.lower_body_detection(destino+"temp"+ficheros[x]);
-//            scanner.upper_body_detection(destino+"temp"+ficheros[x]);
-            //scanner.breasts_detection(origen+ficheros[x]);
-                    scanner.full_body_detection(origen+ficheros[x]);
-                    scanner.lower_body_detection(origen+ficheros[x]);
-                    scanner.upper_body_detection(origen+ficheros[x]);
-                    if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0 )
+            scanner.convert_to_hsv(origen+ficheros[x],destino+"temp"+ficheros[x]);
+            scanner.full_body_detection(destino+"temp"+ficheros[x]);
+            scanner.lower_body_detection(destino+"temp"+ficheros[x]);
+            scanner.upper_body_detection(destino+"temp"+ficheros[x]);
+            java.nio.file.Path destinoPath2 = java.nio.file.FileSystems.getDefault().getPath(destino+"temp"+ficheros[x]);
+            try
+                {
+                    Files.deleteIfExists(destinoPath2);
+                }
+            catch (Exception e)
+                {
+                    System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
+                }
+                    if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0 ) //bien 18/26 (70%), 15/19(78%)   y  mal 7/26(27) y 14/25(56)
                     {
                         //System.out.println("ALERTA!! " + origen+ficheros[x]);
                         //copiar la evidencia a otra carpeta o destino
@@ -298,7 +354,9 @@ public class principal extends javax.swing.JFrame {
                         java.nio.file.Path destinoPath = java.nio.file.FileSystems.getDefault().getPath(destino+ficheros[x]);
                         try
                         {
+                            System.out.println(origen+ficheros[x]);
                             Files.copy(origenPath, destinoPath,java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                            Files.deleteIfExists(destinoPath2);
                         }
                         catch (Exception e)
                         {
@@ -307,7 +365,7 @@ public class principal extends javax.swing.JFrame {
                     }
             //File temp = new File(destino+"temp"+ficheros[x]);
             //temp.delete();
-                    x=x+1;
+                    //x=x+1;
                     scanner.reset_flags();
                 }
                 System.out.println("Completo!!!");
@@ -317,16 +375,17 @@ public class principal extends javax.swing.JFrame {
         }
         scanner=null;
         System.gc();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btm_objetoActionPerformed
+//adsadasd
+    
+    private void btm_profundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btm_profundoActionPerformed
         // TODO add your handling code here:
 
         nu_scanner scanner = new nu_scanner();
         //funciona 
-        String origen=jTextField1.getText();
-        String intermedio=jTextField1.getText();
-        String destino=jTextField2.getText();
+        String origen=txt_analizar.getText();
+        String intermedio=txt_analizar.getText();
+        String destino=txt_resultados.getText();
         if (!(origen.equals("")) && !(destino.equals("")))
         {
             File dir = new File(origen);
@@ -334,17 +393,24 @@ public class principal extends javax.swing.JFrame {
             if (dir.exists() && dir2.exists())
             {
                 String[] ficheros = dir.list();
-                int x=0;
-                while(ficheros != null)
+                for(int x=1; x<ficheros.length;x++)
                 {
                     scanner.convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
-                    //probar con 0.19
                     double y = scanner.skin_scan(intermedio+"temp"+ficheros[x]);
                     if (y>0.15)
                     {
-                        scanner.full_body_detection(origen+ficheros[x]);
-                        scanner.lower_body_detection(origen+ficheros[x]);
-                        scanner.upper_body_detection(origen+ficheros[x]);
+                        scanner.full_body_detection(intermedio+"temp"+ficheros[x]);
+                        scanner.lower_body_detection(intermedio+"temp"+ficheros[x]);
+                        scanner.upper_body_detection(intermedio+"temp"+ficheros[x]);
+                        java.nio.file.Path destinoPath2 = java.nio.file.FileSystems.getDefault().getPath(destino+"temp"+ficheros[x]);
+                        try
+                            {
+                                Files.deleteIfExists(destinoPath2);
+                            }
+                        catch (Exception e)
+                            {
+                                System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
+                            }
                         if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0)
                             {
                                 System.out.println("ALERTA!! " + origen+ficheros[x]);
@@ -363,7 +429,6 @@ public class principal extends javax.swing.JFrame {
                     }
                     File temp = new File(intermedio+"temp"+ficheros[x]);
                     temp.delete();
-                    x=x+1;
                 }                        
             }
             dir=null;
@@ -371,13 +436,13 @@ public class principal extends javax.swing.JFrame {
         }
         scanner=null;
         System.gc();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btm_profundoActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btm_reconocimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btm_reconocimientoActionPerformed
         nu_scanner scanner = new nu_scanner();
-        String origen=jTextField1.getText();
-        String destino=jTextField2.getText();
-        String entrenamiento=jTextField3.getText();
+        String origen=txt_analizar.getText();
+        String destino=txt_resultados.getText();
+        String entrenamiento=txt_aprender.getText();
         if (!(origen.equals("")) && !(destino.equals("")) && !(entrenamiento.equals("")))
         {
             File ef1 = new File(origen);
@@ -393,7 +458,13 @@ public class principal extends javax.swing.JFrame {
                 System.gc();
             }
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btm_reconocimientoActionPerformed
+
+    private void item_bdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_bdActionPerformed
+        // TODO add your handling code here:
+        Interfaz.base_datos bd = new Interfaz.base_datos();
+        bd.setVisible(true);
+    }//GEN-LAST:event_item_bdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -431,17 +502,22 @@ public class principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton Btm_reconstruir;
+    private javax.swing.JButton btm_objeto;
+    private javax.swing.JButton btm_profundo;
+    private javax.swing.JButton btm_reconocimiento;
+    private javax.swing.JButton btm_texturas;
+    private javax.swing.JMenuBar conte_menu;
+    private javax.swing.JMenuItem item_bd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    public javax.swing.JTextField jTextField1;
-    public javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu menubtm_configurar;
+    public javax.swing.JTextField txt_analizar;
+    private javax.swing.JTextField txt_aprender;
+    public javax.swing.JTextField txt_resultados;
     // End of variables declaration//GEN-END:variables
 
     private boolean recuperar(BufferedReader buffrd, String sLine, paquete mipaquete)
