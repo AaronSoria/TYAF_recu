@@ -1,7 +1,0 @@
-el rol y credenciales en mongo
-https://www.tutorialspoint.com/mongodb/mongodb_java.htm
-db.createUser( { user: "Aaron", pwd: "0123456789", roles: ["dbOwner"] } )
-en el dia 02/04/2018 se han creado realizado exitosamente la creacion e
-insercion de los paquetes en la base de datos
-ahora debemoa analizar el trafico UDP
-
