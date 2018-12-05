@@ -41,6 +41,24 @@ public int upper;
 public int breasts;
 
 
+    private static nu_scanner instance;
+    
+    
+    private nu_scanner() { }
+    
+    public static nu_scanner getnu_scanner()
+    {
+        if (instance == null)
+        {
+            instance = new nu_scanner();
+            return instance;
+        }
+        else
+        {
+            return instance;
+        }
+    }
+        
     public void reset_flags()
     {
         this.full=0;

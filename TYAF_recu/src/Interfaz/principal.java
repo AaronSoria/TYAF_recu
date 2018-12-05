@@ -270,7 +270,7 @@ public class principal extends javax.swing.JFrame {
 
     private void btm_texturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btm_texturasActionPerformed
 
-        nu_scanner scanner = new nu_scanner();
+        //nu_scanner scanner = new nu_scanner();
         //funciona 
         String origen=txt_analizar.getText();
         String intermedio=txt_analizar.getText();
@@ -284,9 +284,11 @@ public class principal extends javax.swing.JFrame {
                 String[] ficheros = dir.list();
                 for(int x=1; x<ficheros.length;x++)
                 {
-                    scanner.convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
+                    nu_scanner.getnu_scanner().convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
+                    //scanner.convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
                     //probar con 0.19
-                    double y = scanner.skin_scan(intermedio+"temp"+ficheros[x]);
+                    double y = nu_scanner.getnu_scanner().skin_scan(intermedio+"temp"+ficheros[x]);
+                    //double y = scanner.skin_scan(intermedio+"temp"+ficheros[x]);
                     if (y>0.15)  //bien 17/19 mal 5/25  bien:11/26  mal 10/26
                     {
                         System.out.println("ALERTA!! " + origen+ficheros[x]);
@@ -310,16 +312,17 @@ public class principal extends javax.swing.JFrame {
             dir=null;
             dir2=null;
         }        
-        scanner=null;
+//        scanner=null;
         System.gc();
     }//GEN-LAST:event_btm_texturasActionPerformed
 
     private void btm_objetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btm_objetoActionPerformed
         // TODO add your handling code here:
-        nu_scanner scanner = new nu_scanner();
+        //nu_scanner scanner = new nu_scanner();
         //funciona
         String origen=txt_analizar.getText();
         String destino=txt_resultados.getText();
+        String intermedio=txt_analizar.getText();
         if (!(origen.equals("")) && !(destino.equals("")))
         {
             File dir = new File(origen);
@@ -333,11 +336,18 @@ public class principal extends javax.swing.JFrame {
                 {
                     System.out.println(x);
             //scanner.convert_to_greyscale(origen+ficheros[x],destino+"temp"+ficheros[x]);
+            /*
             scanner.convert_to_hsv(origen+ficheros[x],destino+"temp"+ficheros[x]);
             scanner.full_body_detection(destino+"temp"+ficheros[x]);
             scanner.lower_body_detection(destino+"temp"+ficheros[x]);
             scanner.upper_body_detection(destino+"temp"+ficheros[x]);
-            java.nio.file.Path destinoPath2 = java.nio.file.FileSystems.getDefault().getPath(destino+"temp"+ficheros[x]);
+            */
+            //scanner.convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
+                    nu_scanner.getnu_scanner().convert_to_hsv(origen+ficheros[x],destino+"temp"+ficheros[x]);
+                    nu_scanner.getnu_scanner().full_body_detection(destino+"temp"+ficheros[x]);
+                    nu_scanner.getnu_scanner().lower_body_detection(destino+"temp"+ficheros[x]);
+                    nu_scanner.getnu_scanner().upper_body_detection(destino+"temp"+ficheros[x]);
+                    java.nio.file.Path destinoPath2 = java.nio.file.FileSystems.getDefault().getPath(destino+"temp"+ficheros[x]);
             try
                 {
                     Files.deleteIfExists(destinoPath2);
@@ -346,7 +356,7 @@ public class principal extends javax.swing.JFrame {
                 {
                     System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
                 }
-                    if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0 ) //bien 18/26 (70%), 15/19(78%)   y  mal 7/26(27) y 14/25(56)
+                    if (nu_scanner.getnu_scanner().full != 0 || nu_scanner.getnu_scanner().lower != 0 || nu_scanner.getnu_scanner().upper != 0 ) //bien 18/26 (70%), 15/19(78%)   y  mal 7/26(27) y 14/25(56)
                     {
                         //System.out.println("ALERTA!! " + origen+ficheros[x]);
                         //copiar la evidencia a otra carpeta o destino
@@ -366,14 +376,14 @@ public class principal extends javax.swing.JFrame {
             //File temp = new File(destino+"temp"+ficheros[x]);
             //temp.delete();
                     //x=x+1;
-                    scanner.reset_flags();
+                    nu_scanner.getnu_scanner().reset_flags();
                 }
                 System.out.println("Completo!!!");
             }
             dir=null;
             dir2=null;
         }
-        scanner=null;
+        //scanner=null;
         System.gc();
     }//GEN-LAST:event_btm_objetoActionPerformed
 //adsadasd
@@ -381,7 +391,7 @@ public class principal extends javax.swing.JFrame {
     private void btm_profundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btm_profundoActionPerformed
         // TODO add your handling code here:
 
-        nu_scanner scanner = new nu_scanner();
+        //nu_scanner scanner = new nu_scanner();
         //funciona 
         String origen=txt_analizar.getText();
         String intermedio=txt_analizar.getText();
@@ -395,13 +405,13 @@ public class principal extends javax.swing.JFrame {
                 String[] ficheros = dir.list();
                 for(int x=1; x<ficheros.length;x++)
                 {
-                    scanner.convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
-                    double y = scanner.skin_scan(intermedio+"temp"+ficheros[x]);
+                    nu_scanner.getnu_scanner().convert_to_hsv(origen+ficheros[x], intermedio+"temp"+ficheros[x]);
+                    double y = nu_scanner.getnu_scanner().skin_scan(intermedio+"temp"+ficheros[x]);
                     if (y>0.15)
                     {
-                        scanner.full_body_detection(intermedio+"temp"+ficheros[x]);
-                        scanner.lower_body_detection(intermedio+"temp"+ficheros[x]);
-                        scanner.upper_body_detection(intermedio+"temp"+ficheros[x]);
+                        nu_scanner.getnu_scanner().full_body_detection(intermedio+"temp"+ficheros[x]);
+                        nu_scanner.getnu_scanner().lower_body_detection(intermedio+"temp"+ficheros[x]);
+                        nu_scanner.getnu_scanner().upper_body_detection(intermedio+"temp"+ficheros[x]);
                         java.nio.file.Path destinoPath2 = java.nio.file.FileSystems.getDefault().getPath(destino+"temp"+ficheros[x]);
                         try
                             {
@@ -411,7 +421,7 @@ public class principal extends javax.swing.JFrame {
                             {
                                 System.out.println("ha ocurrido un error con "+origen+ficheros[x]);
                             }
-                        if (scanner.full != 0 || scanner.lower != 0 || scanner.upper != 0)
+                        if (nu_scanner.getnu_scanner().full != 0 || nu_scanner.getnu_scanner().lower != 0 || nu_scanner.getnu_scanner().upper != 0)
                             {
                                 System.out.println("ALERTA!! " + origen+ficheros[x]);
                                 //copiar la evidencia a otra carpeta o destino
@@ -434,12 +444,12 @@ public class principal extends javax.swing.JFrame {
             dir=null;
             dir2=null;
         }
-        scanner=null;
+        //scanner=null;
         System.gc();
     }//GEN-LAST:event_btm_profundoActionPerformed
 
     private void btm_reconocimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btm_reconocimientoActionPerformed
-        nu_scanner scanner = new nu_scanner();
+        //nu_scanner scanner = new nu_scanner();
         String origen=txt_analizar.getText();
         String destino=txt_resultados.getText();
         String entrenamiento=txt_aprender.getText();
@@ -450,11 +460,11 @@ public class principal extends javax.swing.JFrame {
             File ef3 = new File(entrenamiento);
             if (ef1.exists() && ef2.exists() && ef3.exists())
             {
-                scanner.face_recognition(entrenamiento,origen,destino);
+                nu_scanner.getnu_scanner().face_recognition(entrenamiento,origen,destino);
                 ef1=null;
                 ef2=null;
                 ef3=null;
-                scanner = null;
+                //scanner = null;
                 System.gc();
             }
         }
